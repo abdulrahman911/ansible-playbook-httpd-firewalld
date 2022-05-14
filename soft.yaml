@@ -1,0 +1,34 @@
+---
+
+- name: install httpd and firewalld on the remote  nodes
+  become: yes
+  hosts: nodes
+  tasks: 
+    - name: Install httpd & firewalld
+      yum: 
+        name:
+          - httpd
+          - firewalld
+        state: latest
+    - name: Enable and start HTTPD
+      service: 
+        name: httpd
+        enabled: true
+        state: started
+    - name: Enable Firewalld service
+      service: 
+        name: firewalld
+        enabled: true
+        state: started
+    - name: allow permit traffic in default zone on port 80/tcp 
+      firewalld: 
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+    - name: Copy using inline content
+      copy: 
+        content: "Hey the content we are pushed through ansible in all our nodes, <br>This is pretty uch amazing!!! "
+        dest: /var/www/html/index.html
+
+  

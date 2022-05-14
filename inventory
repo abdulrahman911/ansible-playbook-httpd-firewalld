@@ -1,0 +1,23 @@
+[myself]
+ansible-engine ansible_connection=local
+
+[nodes]
+node1 ansible_host=172.31.9.41
+node2 ansible_host=172.31.0.148
+
+[manyservers]
+mydb[a:g].example.com
+
+[manyip]
+192.168.0.[7:20]
+
+[db]
+db01
+db02
+db03
+
+[webservers]
+web1
+web2
+web3
+
